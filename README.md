@@ -1,81 +1,64 @@
-# NataCoin
+# NataCoin Frontend
 
-**A MiniPay-native financial cooperative for Lisbon**
+React + TypeScript frontend for the NataCoin MiniPay dApp.
 
-NataCoin is a Celo-native stablecoin and cooperative system that enables everyday payments, cooperative property funds, and community governance.
-
-## Project Structure
-
-```
-Natacoin/
-├── contracts/          # Solidity smart contracts
-├── app/                # React frontend (MiniPay dApp)
-├── backend/            # Node.js backend services
-└── docs/               # Architecture and documentation
-```
-
-## Quick Start
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- MetaMask or MiniPay wallet (for Celo Alfajores)
-
-### Setup
+## Setup
 
 1. **Install dependencies:**
    ```bash
-   # Contracts
-   cd contracts && npm install
-
-   # Frontend
-   cd ../app && npm install
-
-   # Backend
-    cd ../backend && npm install
+   npm install
    ```
 
-2. **Deploy contracts to Alfajores:**
+2. **Configure environment:**
    ```bash
-   cd contracts
-   npx hardhat run scripts/deploy.ts --network alfajores
+   cp .env.example .env
+   ```
+   
+   Edit `.env` and add your deployed contract addresses:
+   ```env
+   VITE_NATA_TOKEN_ADDRESS=0x...
+   VITE_TREASURY_ADDRESS=0x...
+   VITE_GOVERNANCE_REGISTRY_ADDRESS=0x...
+   VITE_PROPERTY_VAULT_ADDRESS=0x...
+   VITE_SIMPLE_GOVERNANCE_ADDRESS=0x...
+   VITE_CELO_RPC_URL=https://alfajores-forno.celo-testnet.org
+   VITE_BACKEND_URL=http://localhost:3001
    ```
 
-3. **Start backend:**
+3. **Start development server:**
    ```bash
-   cd backend
    npm run dev
    ```
 
-4. **Start frontend:**
-   ```bash
-   cd app
-   npm run dev
-   ```
+   The app will be available at `http://localhost:3000`
 
-See individual README files in each directory for detailed instructions.
+## Features
 
-## Features (MVP)
+- **Wallet Overview**: View NATA balance and coefficient
+- **Send NATA**: Transfer NATA to other addresses
+- **Cooperative Vault**: Deposit and withdraw NATA from the property fund
+- **Governance**: View and vote on proposals
+- **Identity Status**: View locality, reputation, and participation scores
 
-- ✅ NATA stablecoin (ERC-20)
-- ✅ Treasury minting/burning
-- ✅ Governance registry (locality, reputation, participation)
-- ✅ Property cooperative vault
-- ✅ Basic governance voting (stub)
-- ✅ Filecoin storage integration (Synapse SDK)
-- ✅ libp2p messaging (minimal demo)
+## Wallet Connection
 
-## Integrations
-
-- **MiniPay**: Wallet connection and payments
-- **Self Protocol**: Residency verification (stub)
-- **DAVINCI**: Governance voting (stub)
-- **Filecoin**: Decentralized storage
-- - **libp2p**: P2P messaging
+The app supports:
+- MiniPay (Celo mobile wallet)
+- MetaMask (with Celo network configured)
+- Any wallet that supports Celo/Alfajores
 
 ## Development
 
-This is a hackathon MVP. Some integrations are stubbed and can be upgraded to production SDKs later.
+- Built with Vite + React + TypeScript
+- Uses ethers.js for blockchain interactions
+- React Query for data fetching
+- React Router for navigation
 
-See `docs/architecture.md` for detailed architecture.
+## Build
+
+```bash
+npm run build
+```
+
+Output will be in the `dist/` directory.
+
