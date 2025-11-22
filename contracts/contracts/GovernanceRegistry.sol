@@ -30,9 +30,9 @@ contract GovernanceRegistry is Ownable {
     /// @notice Event emitted when participation is updated
     event ParticipationUpdated(address indexed user, uint256 newScore);
 
+    constructor() Ownable(msg.sender) {}
 
-
-/**
+    /**
      * @notice Set locality verification status for a user
      * @dev For MVP: admin-controlled. Future: callable by Self Protocol integration
      * @param user Address of the user
@@ -59,7 +59,7 @@ contract GovernanceRegistry is Ownable {
         profiles[user].reputationScore += amount;
         emit ReputationUpdated(user, profiles[user].reputationScore);
     }
-    
+
     /**
      * @notice Increment participation score for a user
      * @dev For MVP: admin-controlled. Future: auto-incremented on governance participation
@@ -121,6 +121,5 @@ contract GovernanceRegistry is Ownable {
         return profiles[user];
     }
 }
-
 
 
